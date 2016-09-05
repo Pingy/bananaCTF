@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<map proto="1.4.0">
+<name>bananaCTF</name>
+<version>1.0.0</version>
+<objective> Capture the flag to make your team win! :D</objective>
+<authors>
+    <author uuid="14aad06f-6fc0-4b26-be7b-187c3be8eb89" contribution="Building and XML."/> <!-- 68pingy -->
+</authors>
+<contributors>
+    <contributor uuid="75fd93dd-8e48-4698-81a2-97dae2ec5b5f" contribution="XML Genius."/> <!-- Pugzy -->
+    <contributor uuid="17feaec5-9616-49d8-a507-83026050dd8f" contribution="Hosted build server."/> <!-- ShinyDialga -->
+    <contributor uuid="f70b7a8f-93b2-480f-9d54-88e21485a042" contribution="Helped with XML."/> <!-- Diamyx -->
+</contributors>
+<rules>
+    <rule>Make alliences with other teams to gang on other teams!</rule>
+</rules>
+<!-- OBJECTIVOS -->
+<score>
+  <limit>60</limit>
+</score>
+<flags>
+    <flag name="el flag" color="white" shared="true" points-rate="1">
+        <post return-time="0s" respawn-time="3s">0.5,6,0.5</post>
+    </flag>
+</flags>
+<!-- LE TEAMS -->
+<teams>
+  <team id="teamPurple" color="light purple" max="6" max-overfill="8">Fiberous Raspberries</team>
+  <team id="teamBlue" color="blue" max="6" max-overfill="8">Blues Clues</team>
+  <team id="teamGreen" color="green" max="6" max-overfill="8">Leafy Veggies</team>
+  <team id="teamOrange" color="gold" max="6" max-overfill="8">Juicy Oranges</team>
+</teams>
+<kits>
+    <kit id="kitSpawn">
+        <item slot="0">stone sword</item>
+        <item slot="1">bow</item>
+        <item slot="2">cooked beef</item>
+        <item slot="3" amount="3">arrow</item>
+        <item slot="8" amount="64">melon block</item>
+        <potion duration="3" amplifier="2">heal</potion>
+        <potion duration="6">confusion</potion>
+        <double-jump power="3" recharge-time="3s" recharge-before-landing="true"/>
+    </kit>
+    <kit id="kitBlue" parents="kitSpawn">
+        <helmet color="334CB2" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="334CB2" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <leggings color="334CB2" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="334CB2" unbreakable="true" locked="true">leather boots</boots>
+    </kit>
+    <kit id="kitOrange" parents="kitSpawn">
+        <helmet color="D87F33" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="D87F33" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <leggings color="D87F33" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="D87F33" unbreakable="true" locked="true">leather boots</boots>
+    </kit>
+    <kit id="kitPurple" parents="kitSpawn">
+        <helmet color="7F3FB2" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="7F3FB2" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <leggings color="7F3FB2" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="7F3FB2" unbreakable="true" locked="true">leather boots</boots>
+    </kit>
+    <kit id="kitGreen" parents="kitSpawn">
+        <helmet color="667F33" unbreakable="true" locked="true">leather helmet</helmet>
+        <chestplate color="667F33" unbreakable="true" locked="true">leather chestplate</chestplate>
+        <leggings color="667F33" unbreakable="true" locked="true">leather leggings</leggings>
+        <boots color="667F33" unbreakable="true" locked="true">leather boots</boots>
+    </kit>
+</kits>
+<spawns>
+    <spawn team="teamBlue" kit="kitBlue" safe="true">
+        <regions yaw="45"><point>-15.5,3.5,16.5</point></regions>
+    </spawn>
+    <spawn team="teamOrange" kit="kitOrange" safe="true">
+        <regions yaw="-45"><point>16.5,3.5,16.5</point></regions>
+    </spawn>
+    <spawn team="teamPurple" kit="kitPurple" safe="true">
+        <regions yaw="-135"><point>16.5,4,-15.5</point></regions>
+    </spawn>
+    <spawn team="teamGreen" kit="kitGreen" safe="true">
+        <regions yaw="135"><point>-15.5,3.5,-15.5</point></regions>
+    </spawn>
+    <default>
+        <regions yaw="90">
+            <cylinder base="-0.5,22,0.5" radius="1" height="1"/>
+        </regions>
+    </default>
+</spawns>
+<crafting>
+    <shapeless>
+            <result>arrow</result>
+            <ingredient>diamond</ingredient>
+    </shapeless>
+</crafting>
+<killreward>
+    <item amount="1">arrow</item>
+</killreward>
+<blockdrops>
+    <rule>
+        <region>
+            <everywhere/>
+        </region>
+        <filter>
+            <any>
+                <material>melon block</material>
+            </any>
+        </filter>
+        <drops>
+            <item chance="0.1" material="diamond"/>
+            <item chance="0.4" material="arrow"/>
+        </drops>
+        <experience>1</experience>
+    </rule>
+    <rule trample="true">
+       <region><everywhere/></region>
+        <filter>
+            <all>
+                <material>melon block</material>
+                <cause>trample</cause>
+                <any>
+                    <all>
+                        <sprinting/>
+                        <random>0.3</random>
+                    </all>
+                    <all>
+                        <walking/>
+                        <random>0.1</random>
+                    </all>
+                    <all>
+                        <crouching/>
+                        <random>0</random>
+                    </all>
+                </any>
+            </all>
+        </filter>
+        <replacement>air</replacement>
+    </rule>
+</blockdrops>
+<regions>
+    <apply block-break="only-melons" parents="never">
+        <everywhere/>
+    </apply>
+    <apply block="never" region="team-spawns"/>
+    <union id="team-spawns">
+        <rectangle min="-14,-14" max="-16,-16"/> <!-- Green Spawn -->
+        <rectangle min="15,-14" max="17,-16"/> <!-- Purple Spawn -->
+        <rectangle min="15,15" max="17,17"/> <!-- Orange Spawn -->
+        <rectangle min="-14,15" max="-16,17"/> <!-- Blue Spawn -->
+        <rectangle min="1,0" max="0,1"/> <!-- Flag Spawn -->
+    </union>
+</regions>
+<filters>
+    <not id="only-melons">
+        <not>
+            <any>
+                <material>melon block</material>
+            </any>
+        </not>
+    </not>
+</filters>
+<itemremove>
+    <item>leather helmet</item>
+    <item>leather chestplate</item>
+    <item>leather leggings</item>
+    <item>leather boots</item>
+    <item>stick</item>
+</itemremove>
+</map>
